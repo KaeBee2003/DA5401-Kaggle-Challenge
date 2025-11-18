@@ -46,10 +46,35 @@ This is a regression problem within a metric learning context, where the model l
 ## Score distribution
 ##### Train Score Distribution
 
-![[Pasted image 20251118005518.png|500]]
+Score │ Count
+──────────────────────────────────────────────
+  0   │ 
+  1   │ 
+  2   │ 
+  3   │ 
+  4   │ 
+  5   │ 
+  6   │ █
+  7   │ ██
+  8   │ ████
+  9   │ ██████████████████████████████████████████████████████████████
+ 10   │ █████████████████████████████████████████████████████████████████████████████
+
 ##### Sample Score Distribution
 
-![[Pasted image 20251118005544.png|500]]
+Score │ Count
+──────────────────────────────────────────────
+  1   │ ███████████
+  2   │ █████████
+  3   │ ███████████
+  4   │ █████████
+  5   │ ███████████
+  6   │ █████████
+  7   │ ███████████
+  8   │ █████████
+  9   │ ███████████
+ 10   │ ████████████████████
+
 
 ---
 ‎ 
@@ -134,25 +159,24 @@ def main():
 - user_prompt, response, system_prompt were combined, before generating embeddings
 - embeddings were generated using the specified model, and reduced batch size
 - Cosine similarity as a feature was  added, to reduce model's burden, ε was added to avoid zero division error
-$$  
+```math
 cosine = \frac{\mathbf{m} \cdot \mathbf{c}}{\lVert \mathbf{m} \rVert , \lVert \mathbf{c} \rVert + \varepsilon}  
-$$
+```
 
 - PCA was done on the model to reduce the features from around 513 to 478, since 478 features were required to explain 95% of variance 
 - The target Values were transformed, to over come the issue of right skew, before training.
-$$
-y_{\text{transformed}} = \log\left(1 + y_{\text{raw}}\right)  
-$$
-
- - And inverse transform was also applied to the predicted values 
-
-$$
-y_{\text{pred}} = e^{y_{\text{pred\_log}}} - 1
-$$
 
 ```math
 y_{\text{transformed}} = \log\left(1 + y_{\text{raw}}\right)
 ```
+
+ - And inverse transform was also applied to the predicted values 
+
+```math
+y_{\text{pred}} = e^{y_{\text{pred\_log}}} - 1
+```
+
+
 - The new reduced features was sent to MLP for training
 
 
@@ -202,7 +226,19 @@ shuffle=True # Randomisation for more robustness
 The final trained model was used to predict the scores in test data, and were clipped to (0,10)
 ##### Test Score Distribution (After Running the Model)
 
-![[Pasted image 20251118005529.png|500]]
+Score │ Count
+──────────────────────────────────────────────
+  1   │ ██
+  2   │ ████
+  3   │ ██████
+  4   │ █████████
+  5   │ ████████████
+  6   │ ████████████████
+  7   │ ████████████████████
+  8   │ ████████████████████████
+  9   │ ████████████████████████████
+ 10   │ ████████████████████████████████
+
 
 **Test Set Predictions:**
 Distribution still slightly aligns with training data (right-skewed) but there are no extreme outliers after clipping. Smooth distribution suggests that generalization is good
