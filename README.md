@@ -44,7 +44,7 @@ This is a regression problem within a metric learning context, where the model l
 **The train data has all of these features, but the test data have all columns except `score` which is the target Variable**  
 
 ## Score distribution
-##### Train Score Distribution
+##### Train Score Distribution (Very Skewed to 10)
 
 ```
 Score │ Count
@@ -62,7 +62,7 @@ Score │ Count
  10   │ █████████████████████████████████████████████████████████████████████████████
 ```
 
-##### Sample Score Distribution
+##### Sample Score Distribution (Almost Uniform + Spike at 10)
 
 ```
 Score │ Count
@@ -227,7 +227,7 @@ shuffle=True # Randomisation for more robustness
 #### Prediction
 
 The final trained model was used to predict the scores in test data, and were clipped to (0,10)
-##### Test Score Distribution (After Running the Model)
+##### Test Score Distribution (Increasing Pattern due to log transform)
 
 ```
 Score │ Count
