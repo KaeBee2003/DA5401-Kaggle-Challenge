@@ -46,6 +46,7 @@ This is a regression problem within a metric learning context, where the model l
 ## Score distribution
 ##### Train Score Distribution
 
+```
 Score │ Count
 ──────────────────────────────────────────────
   0   │ 
@@ -59,9 +60,11 @@ Score │ Count
   8   │ ████
   9   │ ██████████████████████████████████████████████████████████████
  10   │ █████████████████████████████████████████████████████████████████████████████
+```
 
 ##### Sample Score Distribution
 
+```
 Score │ Count
 ──────────────────────────────────────────────
   1   │ ███████████
@@ -74,7 +77,7 @@ Score │ Count
   8   │ █████████
   9   │ ███████████
  10   │ ████████████████████
-
+```
 
 ---
 ‎ 
@@ -226,6 +229,7 @@ shuffle=True # Randomisation for more robustness
 The final trained model was used to predict the scores in test data, and were clipped to (0,10)
 ##### Test Score Distribution (After Running the Model)
 
+```
 Score │ Count
 ──────────────────────────────────────────────
   1   │ ██
@@ -238,7 +242,7 @@ Score │ Count
   8   │ ████████████████████████
   9   │ ████████████████████████████
  10   │ ████████████████████████████████
-
+```
 
 **Test Set Predictions:**
 Distribution still slightly aligns with training data (right-skewed) but there are no extreme outliers after clipping. Smooth distribution suggests that generalization is good
