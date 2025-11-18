@@ -150,6 +150,9 @@ $$
 y_{\text{pred}} = e^{y_{\text{pred\_log}}} - 1
 $$
 
+```math
+y_{\text{transformed}} = \log\left(1 + y_{\text{raw}}\right)
+```
 - The new reduced features was sent to MLP for training
 
 
